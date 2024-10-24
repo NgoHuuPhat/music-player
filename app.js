@@ -259,7 +259,6 @@ const app = {
     heading.textContent = this.currentSong.name;
     cdThumb.style.backgroundImage = `url('${this.currentSong.image}')`;
     audio.src = this.currentSong.path;
-    this.setConfig('currentIndex', this.currentIndex);
   },
   nextSong() {
     this.currentIndex++;
@@ -306,9 +305,13 @@ const app = {
     songs[this.currentIndex].classList.add('active');
   },
   loadConfig() {
-    this.currentIndex = this.config.currentIndex;
     this.isRandom = this.config.isRandom;
     this.isRepeat = this.config.isRepeat;
+    
+    // Hiển thị trạng thái ban đầu của button Repeat và Random
+    randomBtn.classList.toggle('active', this.isRandom); // True add - False remove
+    repeatBtn.classList.toggle('active', this.isRepeat);
+  
   },
   start() {
     //Gán cấu hình từ config vào ứng dụng
@@ -326,9 +329,6 @@ const app = {
     //Tải thông tin bài hát đầu tiên vào UI khi chạy ứng dụng
     this.loadCurrentSong();
 
-    // Hiển thị trạng thái ban đầu của button Repeat và Random
-    randomBtn.classList.toggle('active', this.isRandom); // True add - False remove
-    repeatBtn.classList.toggle('active', this.isRepeat);
   },
 };
 app.start();
